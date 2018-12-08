@@ -1,0 +1,129 @@
+package com.pandatem.jiyi;
+
+import android.Manifest;
+import android.app.FragmentTransaction;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+    private int WRITE_COARSE_LOCATION_REQUEST_CODE=11;
+    private TextView mTextMessage;
+    private ViewPager mViewPager;
+    MyPagerAdapter myPagerAdapter;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    mViewPager.setCurrentItem(0);
+                    return true;
+                case R.id.navigation_map:
+                   mTextMessage.setText(R.string.title_map);
+                    mViewPager.setCurrentItem(1);
+                    return true;
+                case R.id.navigation_private:
+                    mTextMessage.setText(R.string.title_private);
+                    mViewPager.setCurrentItem(2);
+                    return true;
+                case R.id.navigation_mine:
+                    mTextMessage.setText(R.string.title_mine);
+                    mViewPager.setCurrentItem(3);
+                    return  true;
+            }
+            return false;
+        }
+    };
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mTextMessage = (TextView) findViewById(R.id.message);
+
+
+        mViewPager = findViewById(R.id.viewpager);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        init();
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(this, new String[]{  Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE},
+                    WRITE_COARSE_LOCATION_REQUEST_CODE);//自定义的code
+        }
+
+
+
+
+    }
+
+
+    private void init(){
+        List<Fragment> fragments = new ArrayList<>();
+
+        HomeFragment homeFragment = new HomeFragment();
+        fragments.add(homeFragment);
+        MapFragment mapFragment = new MapFragment();
+        fragments.add(mapFragment);
+        PrivateFragment privateFragment = new PrivateFragment();
+        fragments.add(privateFragment);
+        MineFragment mineFragment = new MineFragment();
+        fragments.add(mineFragment);
+
+        myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),fragments);
+        mViewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+        mViewPager.setAdapter(myPagerAdapter);
+
+
+
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == WRITE_COARSE_LOCATION_REQUEST_CODE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            } else{//禁止授权，不操作
+
+            }
+        }
+        //可在此继续其他操作。
+    }
+
+}
