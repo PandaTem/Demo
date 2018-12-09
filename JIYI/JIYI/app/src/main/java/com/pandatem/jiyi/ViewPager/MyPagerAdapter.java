@@ -1,4 +1,4 @@
-package com.pandatem.jiyi;
+package com.pandatem.jiyi.ViewPager;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
