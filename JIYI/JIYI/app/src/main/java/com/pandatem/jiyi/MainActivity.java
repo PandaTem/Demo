@@ -1,22 +1,21 @@
 package com.pandatem.jiyi;
 
 import android.Manifest;
-import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.pandatem.jiyi.ViewPager.MyPagerAdapter;
+import com.pandatem.jiyi.ViewPager.MyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int WRITE_COARSE_LOCATION_REQUEST_CODE=11;
     private TextView mTextMessage;
-    private ViewPager mViewPager;
+    private MyViewPager mViewPager;
     MyPagerAdapter myPagerAdapter;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -105,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        mViewPager.setScanScroll(false);
         mViewPager.setAdapter(myPagerAdapter);
 
 
