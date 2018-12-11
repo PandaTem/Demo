@@ -13,7 +13,7 @@ public abstract class HomeRecycleViewAdapter<T> extends RecyclerView.Adapter<Hom
     private Context mContext;
     private int mLayoutId;
     private List<T> mData;
-    private AdapterView.OnItemClickListener onItemClickListener  ;
+    private OnItemClickListener onItemClickListener  ;
 
     public HomeRecycleViewAdapter(@NonNull Context context, int layoutId, List data) {
         mContext = context;
@@ -27,7 +27,24 @@ public abstract class HomeRecycleViewAdapter<T> extends RecyclerView.Adapter<Hom
         return holder;
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull HomeViewHolder holder, int i) {
+        convert(holder,mData.get(i));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mData.size();
+    }
+
     public abstract void convert(HomeViewHolder holder,T t);
 
 
+    public void setOnItemClickListener(OnItemClickListener _onItemClickListener){
+        this.onItemClickListener = _onItemClickListener;
+    }
+
+    public interface  OnItemClickListener{
+        void onClick(int position);
+    }
 }

@@ -30,8 +30,7 @@ public class MineFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
-        TextView mineT = (TextView)view.findViewById(R.id.mine);
-        mineT.setText("MinePage");
+
         return view;
     }
 
