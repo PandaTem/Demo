@@ -1,6 +1,7 @@
 package com.pandatem.jiyi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,13 +26,15 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MapFragment extends Fragment {
 
+    Card card;
     MapView mMapView = null;
-    List mCards;
+    List<Card> mCards;
 
     public MapFragment() {
         // Required empty public constructor
@@ -42,7 +45,7 @@ public class MapFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mCards = new ArrayList<Card>();
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -105,13 +108,20 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "flb", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivityForResult(intent,1);
             }
         });
 
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data1){
+        if (resultCode == 1){
 
+        }
+    }
 
 
 
