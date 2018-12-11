@@ -23,7 +23,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private int WRITE_COARSE_LOCATION_REQUEST_CODE=11;
-    private TextView mTextMessage;
     private MyViewPager mViewPager;
     MyPagerAdapter myPagerAdapter;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -33,19 +32,15 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
                     mViewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_map:
-                   mTextMessage.setText(R.string.title_map);
                     mViewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_private:
-                    mTextMessage.setText(R.string.title_private);
                     mViewPager.setCurrentItem(2);
                     return true;
                 case R.id.navigation_mine:
-                    mTextMessage.setText(R.string.title_mine);
                     mViewPager.setCurrentItem(3);
                     return  true;
             }
@@ -60,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
 
 
         mViewPager = findViewById(R.id.viewpager);
