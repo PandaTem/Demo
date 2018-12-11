@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
     private TextView submit, pickPermission;
+    private Card card;
     private ImageView pickImage, back, image, person;
     private EditText content;
 
@@ -24,6 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
+        card = new Card();
         findView();
     }
 
@@ -55,6 +57,11 @@ public class DetailActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 pickPermission.setText(permission);
+                                if(permission.equals("公开")){
+                                    card.setPrivate(false);
+                                }else{
+                                    card.setPrivate(true);
+                                }
                             }
                         }).setNegativeButton("取消",
                         new DialogInterface.OnClickListener() {
@@ -77,7 +84,9 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //to be continued
+                card.setContent(content.getText().toString());
                 Intent intent = new Intent();
+                intent.putExtra("card",card);
                 setResult(1, intent);
                 finish();
             }
@@ -129,6 +138,7 @@ public class DetailActivity extends AppCompatActivity {
             image.setVisibility(View.VISIBLE);
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
             image.setImageBitmap(bm);
+            card.setCoverBitmap(bm);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
