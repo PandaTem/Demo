@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class Card implements Serializable {
     private Integer id;
+    private Boolean isPrivate;
     private String cover;
     private Bitmap coverBitmap;
     private String title;
@@ -23,7 +24,7 @@ public class Card implements Serializable {
         content="Test";
         person = new Person();
         position="北京";
-
+        isPrivate = false;
     }
 
 
@@ -60,6 +61,10 @@ public class Card implements Serializable {
     }
 
 
+    public Boolean getPrivate() {
+        return isPrivate;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -92,5 +97,8 @@ public class Card implements Serializable {
         this.position = position;
     }
 
+    public void setPrivate(Boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
 }
 
