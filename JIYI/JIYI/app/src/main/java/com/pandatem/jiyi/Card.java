@@ -10,20 +10,21 @@ public class Card implements Serializable {
     private Integer id;
     private Boolean isPrivate;
     private String cover;
-    private Bitmap coverBitmap;
+    private byte[] coverBitmapBytes;
     private String title;
     private String content;
     private Person person;
-    private LatLng latLng;
+    private double latLng_x;
+    private double latLng_y;
     private String position;
 
     public Card(){
         id=0;
         cover="Testcover";
         title="TestTitle";
-        content="Test";
+        content="一段迹忆，一段向往";
         person = new Person();
-        position="北京";
+        position="广州 中山大学";
         isPrivate = false;
     }
 
@@ -40,12 +41,26 @@ public class Card implements Serializable {
         return content;
     }
 
-    public Bitmap getCoverBitmap() {
-        return coverBitmap;
+    public double getLatLng_x() {
+        return latLng_x;
     }
 
-    public LatLng getLatLng() {
-        return latLng;
+    public double getLatLng_y() {
+        return latLng_y;
+    }
+
+
+    //    public Bitmap getCoverBitmap() {
+//        return coverBitmap;
+//    }
+
+//    public LatLng getLatLng() {
+//        return latLng;
+//    }
+
+
+    public byte[] getCoverBitmapBytes() {
+        return coverBitmapBytes;
     }
 
     public Person getPerson() {
@@ -81,12 +96,25 @@ public class Card implements Serializable {
         this.content = content;
     }
 
-    public void setCoverBitmap(Bitmap coverBitmap) {
-        this.coverBitmap = coverBitmap;
+//    public void setCoverBitmap(Bitmap coverBitmap) {
+//        this.coverBitmap = coverBitmap;
+//    }
+
+//    public void setLatLng(LatLng latLng) {
+//        this.latLng = latLng;
+//    }
+
+
+    public void setCoverBitmapBytes(byte[] coverBitmapBytes) {
+        this.coverBitmapBytes = coverBitmapBytes;
     }
 
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
+    public void setLatLng_x(double latLng_x) {
+        this.latLng_x = latLng_x;
+    }
+
+    public void setLatLng_y(double latLng_y) {
+        this.latLng_y = latLng_y;
     }
 
     public void setPerson(Person person) {

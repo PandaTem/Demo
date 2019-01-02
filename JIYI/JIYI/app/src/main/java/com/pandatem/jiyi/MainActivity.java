@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(mineFragment);
 
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),fragments);
+       mViewPager.setOffscreenPageLimit(4);
         mViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

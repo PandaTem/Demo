@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
                 tv_content.setText(card.getContent());
                 tv_position.setText(card.getPosition());
                 tv_user_name.setText(card.getPerson().getName());
+                img_user_cover.setImageResource(R.mipmap.user);
 
             }
         };
@@ -67,7 +68,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        recyclerview.setLayoutManager(new GridLayoutManager(getContext(),2));
+        recyclerview.setLayoutManager(new GridLayoutManager(getContext(),1));
 
 
         recyclerview.setAdapter(homeAdapter);

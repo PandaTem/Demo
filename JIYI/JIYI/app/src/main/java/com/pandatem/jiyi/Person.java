@@ -7,20 +7,20 @@ import java.io.Serializable;
 public class Person implements Serializable {
     private Integer id;
     private String cover;
-    private Bitmap coverBitmap;
+    private byte[] coverBitmapBytes;
     private String name;
     private String password;
 
     public Person(){
         id=0;
         cover="Testcover";
-        name="TestName";
+        name="迹忆";
         password="TestPassword";
     }
 
-    public Bitmap getCoverBitmap() {
-        return coverBitmap;
-    }
+//    public Bitmap getCoverBitmap() {
+//        return coverBitmap;
+//    }
 
     public String getCover() {
         return cover;
@@ -38,8 +38,17 @@ public class Person implements Serializable {
         return password;
     }
 
-    public void setCoverBitmap(Bitmap coverBitmap) {
-        this.coverBitmap = coverBitmap;
+    public byte[] getCoverBitmapBytes() {
+        return coverBitmapBytes;
+    }
+
+    //    public void setCoverBitmap(Bitmap coverBitmap) {
+//        this.coverBitmap = coverBitmap;
+//    }
+
+
+    public void setCoverBitmapBytes(byte[] coverBitmapBytes) {
+        this.coverBitmapBytes = coverBitmapBytes;
     }
 
     public void setCover(String cover) {

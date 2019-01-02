@@ -1,6 +1,8 @@
 package com.pandatem.jiyi;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,9 +20,11 @@ public abstract class MyInfoWindowAdapter implements AMap.InfoWindowAdapter,View
     private String mSnippet;
     private Context mContext;
     private String mTitle;
+    private Card mCard;
 
-    public MyInfoWindowAdapter(Context context) {
+    public MyInfoWindowAdapter(Context context,Card card) {
         mContext = context;
+        mCard = card;
     }
 
     @Override
@@ -37,14 +41,25 @@ public abstract class MyInfoWindowAdapter implements AMap.InfoWindowAdapter,View
 
 
     public void render(Marker marker, View view) {
-        String title = marker.getTitle();
+
         TextView titleUi = ((TextView) view.findViewById(R.id.tv_info_title));
-        titleUi.setText(title);
+        titleUi.setText(mCard.getPerson().getName());
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.imgv_info);
-        imageView.setImageResource(R.mipmap.ic_launcher);
-        imageView.setOnClickListener(this);
+        TextView contentUi = ((TextView) view.findViewById(R.id.tv_info_content));
+        contentUi.setText(mCard.getContent());
 
+        ImageView imageView = (ImageView) view.findViewById(R.id.imgv_info);
+        if(mCard.getCoverBitmapBytes() != null) {
+            imageView.setVisibility(View.VISIBLE);
+            byte[] bytes = mCard.getCoverBitmapBytes();
+            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+
+            imageView.setImageBitmap(bmp);
+            imageView.setOnClickListener(this);
+        }else{
+            imageView.setVisibility(View.GONE);
+        }
     }
 
 

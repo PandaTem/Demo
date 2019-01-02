@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+
 public class DetailActivity extends AppCompatActivity {
     private TextView submit, pickPermission;
     private Card card;
@@ -25,8 +27,9 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
-        card = new Card();
+        card =(Card)getIntent().getSerializableExtra("card");
         findView();
+        setListener();
     }
 
     private void findView(){
@@ -70,6 +73,7 @@ public class DetailActivity extends AppCompatActivity {
 
                             }
                         });
+                alertDialog.show();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +142,10 @@ public class DetailActivity extends AppCompatActivity {
             image.setVisibility(View.VISIBLE);
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
             image.setImageBitmap(bm);
-            card.setCoverBitmap(bm);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] bytes=baos.toByteArray();
+            card.setCoverBitmapBytes(bytes);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
